@@ -3,46 +3,185 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
   
   <title>Frontend Mentor | FAQ accordion</title>
 
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
   <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
+
+    body {
+      align-items: center;
+      background: rgba(248, 238, 255, 1) url(assets/images/background-pattern-mobile.svg) center top no-repeat;
+      background-size: contain;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 0 1.5rem;
+      margin: 0;
+      font-family: 'Work Sans', sans-serif;
+    }
+
+    h1 {
+      display: none;
+    }
+
+    main {
+      background: white;
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      width: 37.5rem;
+      box-shadow: 0px 32px 56px 0px rgba(80, 0, 118, 0.10);
+    }
+
+    .accordion-title {
+      font-size: 2rem;
+      padding-left: 3rem;
+      position: relative;
+      margin-top: 0;
+    }
+
+    .accordion-title:after {
+      content: '';
+      background: url(assets/images/icon-star.svg) no-repeat center center;
+      background-size: contain;
+      width: 1.5rem;
+      height: 1.5rem;
+      position: absolute;
+      top: calc(50% - .75rem);
+      left: 0;
+    }
+
+    .accordion-entry-heading {
+      font-size: 1rem;
+      padding-right: 3rem;
+      position: relative;
+      cursor: pointer;
+      line-height: 1.5;
+      min-height: 2rem;
+    }
+
+    .accordion-entry-heading:hover, .accordion-entry-heading:focus {
+      color: #AD28EB;
+    }
+    
+    .accordion-entry-heading:focus {
+      outline-color: #AD28EB;
+    }
+
+    .accordion-entry-heading:after {
+      content: '';
+      background: url(assets/images/icon-plus.svg) no-repeat center center;
+      width: 1.875rem;
+      height: 1.875rem;
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+    
+    .accordion-entry-heading.active:after {
+      background: url(assets/images/icon-minus.svg) no-repeat center center;
+    }
+    
+    .accordion-entry-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.1s ease-out;
+      padding-right: 3rem;
+      font-size: 0.875rem;
+      line-height: 1.5;
+    }
+
+    .accordion-entry-heading.active + .accordion-entry-content {
+      max-height: 100vh;
+      transition: max-height 0.1s ease-in;
+    }
+
+    @media screen and (min-width: 768px) {
+      body {
+        background-image: url(assets/images/background-pattern-desktop.svg);
+      }
+    }
   </style>
+
 </head>
 <body>
+  <main role="main">
+    <h1>FAQ Accordion Demo</h1>
+    <section class="accordion-section">
+      <h2 class="accordion-title">  
+        FAQs
+      </h2>
+    
+    <article class="accordion-entry">
+      <h3 class="accordion-entry-heading" tabindex="0">
+        What is Frontend Mentor, and how will it help me?
+      </h3>
+        
+      <p class="accordion-entry-content">
+        Frontend Mentor offers realistic coding challenges to help developers improve their 
+        frontend coding skills with projects in HTML, CSS, and JavaScript. It's suitable for 
+        all levels and ideal for portfolio building.
+      </p>
+    </article>
+        
+    <article class="accordion-entry">
+      <h3 class="accordion-entry-heading" tabindex="0">
+        Is Frontend Mentor free?
+      </h3>
+      
+      <p class="accordion-entry-content">
+        Yes, Frontend Mentor offers both free and premium coding challenges, with the free 
+        option providing access to a range of projects suitable for all skill levels.
+      </p>
+     </article>
+    
+     <article class="accordion-entry">
+       <h3 class="accordion-entry-heading" tabindex="0">
+         Can I use Frontend Mentor projects in my portfolio?
+        </h3>
+        
+        <p class="accordion-entry-content">
+          Yes, you can use projects completed on Frontend Mentor in your portfolio. It's an excellent
+          way to showcase your skills to potential employers!
+        </p>
+      </article>
+    
+      <article class="accordion-entry">
+        <h3 class="accordion-entry-heading" tabindex="0">
+          How can I get help if I'm stuck on a Frontend Mentor challenge?
+        </h3>
+        
+        <p class="accordion-entry-content">
+          The best place to get help is inside Frontend Mentor's Discord community. There's a help 
+          channel where you can ask questions and seek support from other community members.
+        </p>
+      </article>
 
-  FAQs
+    </section>
+  </main>
 
-  What is Frontend Mentor, and how will it help me?
 
-  Frontend Mentor offers realistic coding challenges to help developers improve their 
-  frontend coding skills with projects in HTML, CSS, and JavaScript. It's suitable for 
-  all levels and ideal for portfolio building.
+  <script>
+    const accordionTitles = [...document.querySelectorAll('.accordion-entry h3')]
 
-  Is Frontend Mentor free?
+    for (const title of accordionTitles) {
+      title.addEventListener('click', toggleAccordion)
+      title.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          toggleAccordion.call(title)
+        }
+      })
+    }
 
-  Yes, Frontend Mentor offers both free and premium coding challenges, with the free 
-  option providing access to a range of projects suitable for all skill levels.
+    function toggleAccordion() {
+      this.classList.toggle('active')
+      this.nextElementSibling.classList.toggle('active')
+    }
+  </script>
 
-  Can I use Frontend Mentor projects in my portfolio?
-
-  Yes, you can use projects completed on Frontend Mentor in your portfolio. It's an excellent
-  way to showcase your skills to potential employers!
-
-  How can I get help if I'm stuck on a Frontend Mentor challenge?
-  
-  The best place to get help is inside Frontend Mentor's Discord community. There's a help 
-  channel where you can ask questions and seek support from other community members.
-
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
 </body>
 </html>
