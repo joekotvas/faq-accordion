@@ -6,7 +6,7 @@ My challenge for this project was to build out this faq accordion component and 
 
 I was able to complete the component in vanilla HTML and CSS in just 44 minutes. Pretty close! In that time, I made sure the component was fully responsive and  accessible to keyboard users, including on-brand colors for the keyboard focus ring, etc.
 
-I took another 5 minutes to create this readme and deploy the site to Netlify.
+I took another 10 minutes to create this readme and deploy the site to Netlify.
 
 **Note: Delete this note and update the table of contents based on what sections you keep.**
 
